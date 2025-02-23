@@ -18,13 +18,16 @@ const SizeSelector: FC<IProps> = ({
     <div className="size-selector">
       {sizesDetails?.map((size, idx) => (
         <>
-          <button
-            onClick={() => onSelectSize(size.id)}
-            disabled={!sizes?.includes(size.id)}
+          <div
+            className={`size-selector_size ${
+              size.id === selectedSize ? "selected" : ""
+            } ${!sizes?.includes(size.id) ? "disabled" : ""}`}
+            onClick={() => {
+              if (sizes?.includes(size.id)) onSelectSize(size.id);
+            }}
           >
             {size.label}
-          </button>
-          {size.id === selectedSize && <h1>Выбран</h1>}
+          </div>
         </>
       ))}
     </div>

@@ -3,16 +3,27 @@ import { IColor } from "../store/app.state";
 
 interface IProps {
   colors: IColor[] | undefined;
+  selectedColor: number | null;
   onSelectColor: (colorId: number) => void;
 }
 
-const ColorSelector: FC<IProps> = ({ colors, onSelectColor }) => {
+const ColorSelector: FC<IProps> = ({
+  colors,
+  selectedColor,
+  onSelectColor,
+}) => {
   return (
     <div className="color-selector">
-      {colors?.map((color, idx) => (
-        <button key={color.id} onClick={() => onSelectColor(color.id)}>
+      {colors?.map((color) => (
+        <div
+          className={`color-selector_color ${
+            color.id === selectedColor ? "selected" : ""
+          }`}
+          key={color.id}
+          onClick={() => onSelectColor(color.id)}
+        >
           {color.name}
-        </button>
+        </div>
       ))}
     </div>
   );

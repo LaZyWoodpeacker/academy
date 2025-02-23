@@ -11,10 +11,12 @@ const ProductListItem: FC<IProps> = ({ state }) => {
   const detailsHandle = () => {
     navigate(`/${state.id}`);
   };
+
+  const image = state.colors[0].images[0];
   return (
-    <div>
+    <div className="product-card" onClick={detailsHandle}>
+      <img className="product-card_image" src={image} />
       <h1>{state.name}</h1>
-      <button onClick={detailsHandle}>Подробнее</button>
     </div>
   );
 };

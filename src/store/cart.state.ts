@@ -1,20 +1,20 @@
 import { makeAutoObservable } from "mobx";
 
-export interface IChartAddDTO {
+export interface ICartAddDTO {
   id: number;
   selectedColor: number;
   selectedSize: number;
 }
 
-class ChartState {
-  selectedPositions: (IChartAddDTO & { count: number })[] = [];
+class CartState {
+  selectedPositions: (ICartAddDTO & { count: number })[] = [];
   constructor() {
     makeAutoObservable(this);
-    const localChart = localStorage.getItem("chart");
-    if (localChart) this.selectedPositions = JSON.parse(localChart);
+    const localCart = localStorage.getItem("cart");
+    if (localCart) this.selectedPositions = JSON.parse(localCart);
   }
 
-  addToChart(dto: IChartAddDTO) {
+  addToCart(dto: ICartAddDTO) {
     const alreadyExist = this.selectedPositions.find(
       (position) =>
         position.id === dto.id &&
@@ -23,14 +23,18 @@ class ChartState {
     );
     if (alreadyExist) alreadyExist.count += 1;
     else this.selectedPositions.push({ ...dto, count: 1 });
-    localStorage.setItem("chart", JSON.stringify(this.selectedPositions));
+    localStorage.setItem("cart", JSON.stringify(this.selectedPositions));
   }
 
   remove(idx) {
     this.selectedPositions.splice(idx, 1);
-    localStorage.setItem("chart", JSON.stringify(this.selectedPositions));
+    localStorage.setItem("cart", JSON.stringify(this.selectedPositions));
+  }
+
+  async prepareData(products) {
+    return { sum: 0 };
   }
 }
 
-const state = new ChartState();
+const state = new CartState();
 export default state;

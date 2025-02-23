@@ -11,9 +11,13 @@ const ProductImage: FC<IProps> = ({ images }) => {
   };
   return (
     <div className="product-image">
-      <button onClick={onChangeView}>{"<"}</button>
-      <img width={100} height={100} src={images && images[current]} />
-      <button onClick={onChangeView}>{">"}</button>
+      <div className="product-card_spin-button" onClick={onChangeView}>
+        {"<"}
+      </div>
+      <img className="product-card_image" src={images && images[current]} />
+      <div className="product-card_spin-button" onClick={onChangeView}>
+        {">"}
+      </div>
     </div>
   );
 };

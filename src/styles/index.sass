@@ -1,21 +1,190 @@
+$background-color:#282c34
+$product-list-text-color: #60d2ea
+$primary-color: #fff
+$second-color: #ffffff85
+  
 .main-layout
   display: flex
   flex-direction: column
   min-height: 100vh
+  &_header
+    display: flex
+    justify-content: center
+    align-items: center
+    height: 50px
+    background-color: $background-color
+    padding-top: 5px
+    padding-bottom: 5px
+    border-bottom: 1px solid $second-color
+  &_content
+    display: flex
+    background-color: $background-color
+    align-items: center
+    justify-content: center
+    flex-grow: 1
   
 .color-selector
   display: flex
+  &_color
+    color: transparentize($primary-color,0.5)
+    padding: 5px 2px
+    margin: 5px
+    border-bottom:2px solid $background-color
+    cursor: pointer
+    text-transform: capitalize
+    font-size: 24px
+    &.selected
+      color: white
+      border-color: white
 
 .size-selector
   display: flex
+  margin: 8px 0
+  font-size: 32px
+  cursor: pointer
+  &_size
+    color: transparentize($primary-color,0.4)
+    margin: 2px
+    padding: 2px
+    border-bottom:1px solid $background-color
+    &.selected
+      border-color: $primary-color
+      color: $primary-color
+    &.disabled
+      cursor: not-allowed
+      color: transparentize($primary-color,0.9)
 
-.product-image
+.products-list
   display: flex
 
-.chart-button
+.product-details
   display: flex
   flex-direction: column
+  align-items: center
   &_header
+    color: $product-list-text-color
     display: flex
-  &_footer
+    align-items: center
+    justify-content: center
+    &_close-btn
+      color: $primary-color
+      margin: 24px
+      font-size: 24px
+      text-decoration: underline
+      cursor: pointer
+  &_cart-button
+    border: 3px solid $product-list-text-color
+    padding: 8px
+    border-radius: 8px
+    cursor: pointer
+    font-size: 24px
+    color: $product-list-text-color    
+    animation: scale 2s infinite
+    &:hover
+      transform: scale(1.1)
+    &.disabled
+      cursor: not-allowed
+      animation: none
+      color: transparentize($product-list-text-color,0.9)
+      border-color: transparentize($product-list-text-color,0.9)
+
+  
+.product-card
+  display: flex
+  flex-direction: column
+  align-items: center
+  padding: 12px
+  color: $product-list-text-color
+  cursor: pointer
+  border: solid 2px $background-color
+  border-radius: 8px
+  &:hover    
+    border-color: white
+  &_spin-button
     display: flex
+    align-items: center
+    user-select: none    
+    cursor: pointer
+    color: white
+    padding: 4px
+    font-size: 48px
+  &_image
+    width: 300px
+    height: 400px
+    border-radius: 8px
+
+.product-image
+  display: flex  
+
+.cart-button
+  display: flex
+  flex-direction: column
+  color: white
+  cursor: pointer
+  position: relative
+  &_badge
+    display: flex
+    justify-content: center
+    background-color: red
+    border-radius: 50%
+    position: absolute
+    padding: 2px
+    min-width: 20px
+    top:0
+    right: 0
+.cart
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  &_back
+    color: $primary-color
+    margin: 24px
+    font-size: 24px
+    text-decoration: underline
+    cursor: pointer
+.cart-list
+  display: flex
+  flex-wrap: wrap
+  &_item
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-bottom: 24px
+    &_name
+      color: $product-list-text-color
+      font-size: 36px
+    &_detail
+      color: $primary-color
+      margin: 4px
+      font-size: 24px
+  &_item-remove-btn
+    cursor: pointer
+    border: 2px solid red
+    color: red
+    padding: 8px
+    border-radius: 8px
+    margin-top: 6px
+
+@keyframes spin-animation
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+  
+.loading-placeholder
+  position: absolute
+  display: flex
+  align-items: center
+  justify-content: center
+  background-color: #000000d6
+  color: $primary-color
+  top: 0
+  bottom: 0
+  left: 0
+  right: 0
+  &_spinner
+    animation: spin-animation 1800ms linear infinite
+
+	
